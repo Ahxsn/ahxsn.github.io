@@ -445,22 +445,25 @@ function CTA() {
         <div className="relative max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-foreground/15 glass px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-ember animate-[pulse-glow_2s_ease-in-out_infinite]" />
-            Taking 2 new projects this quarter
+            Booking new projects · Immediate start
           </div>
           <h2 className="mt-6 text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.05]">
-            Let's build something <span className="text-gradient-ember">unforgettable.</span>
+            Ready to launch a site that <span className="text-gradient-ember">actually converts?</span>
           </h2>
           <p className="mt-5 text-lg text-muted-foreground max-w-2xl">
-            Tell me about your brand and where you want it in twelve months. I'll come back with a clear plan,
-            a realistic timeline and a fixed price.
+            Tell me about your project — goals, timeline and budget. I'll come back within one business day
+            with a clear plan and a fixed price. No agency overhead, no surprises.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <a href="#contact" className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-4 text-sm font-medium hover:opacity-90 transition">
-              Start the conversation
-              <span>→</span>
+            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-4 text-sm font-semibold hover:opacity-90 transition">
+              Hire Me
+              <span className="transition-transform group-hover:translate-x-1">→</span>
             </a>
-            <a href="mailto:hello@ahsan.dev" className="inline-flex items-center gap-2 rounded-full glass px-7 py-4 text-sm font-medium hover:ring-ember-glow transition">
-              hello@ahsan.dev
+            <a href="https://wa.me/923039968120" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full glass px-7 py-4 text-sm font-medium hover:ring-ember-glow transition">
+              WhatsApp · +92 303 9968120
+            </a>
+            <a href="mailto:m.ahxsn@gmail.com" className="inline-flex items-center gap-2 rounded-full glass px-7 py-4 text-sm font-medium hover:ring-ember-glow transition">
+              m.ahxsn@gmail.com
             </a>
           </div>
         </div>
@@ -511,16 +514,26 @@ function Contact() {
         <aside className="lg:col-span-5 space-y-5">
           <div className="rounded-3xl border border-foreground/10 bg-card p-6 sm:p-8">
             <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Direct</div>
-            <a href="mailto:hello@ahsan.dev" className="mt-2 block text-2xl font-medium hover:text-ember transition">hello@ahsan.dev</a>
+            <a href="mailto:m.ahxsn@gmail.com" className="mt-2 block text-2xl font-medium hover:text-ember transition">m.ahxsn@gmail.com</a>
             <div className="mt-1 text-sm text-muted-foreground">Replies within one business day.</div>
+            <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+              <div>
+                <div className="text-xs uppercase tracking-widest text-muted-foreground">Phone</div>
+                <a href="tel:+923039968120" className="hover:text-ember transition">+92 303 9968120</a>
+              </div>
+              <div>
+                <div className="text-xs uppercase tracking-widest text-muted-foreground">Location</div>
+                <div>Lahore, Punjab, PK</div>
+              </div>
+            </div>
           </div>
           <div className="rounded-3xl border border-foreground/10 bg-card p-6 sm:p-8 space-y-4">
             <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Elsewhere</div>
             {[
-              { l: "LinkedIn", h: "#" },
-              { l: "GitHub", h: "#" },
-              { l: "Dribbble", h: "#" },
-              { l: "Upwork", h: "#" },
+              { l: "LinkedIn · M-Ahxsn", h: "https://linkedin.com/in/M-Ahxsn" },
+              { l: "GitHub · M-Ahxsn", h: "https://github.com/M-Ahxsn" },
+              { l: "WhatsApp", h: "https://wa.me/923039968120" },
+              { l: "Email", h: "mailto:m.ahxsn@gmail.com" },
             ].map((s) => (
               <a key={s.l} href={s.h} className="flex items-center justify-between group">
                 <span className="text-lg group-hover:text-ember transition">{s.l}</span>
