@@ -25,7 +25,7 @@ function Card({ t, accent }: { t: (typeof TESTIMONIALS)[number]; accent: string 
               <path fill="currentColor" d="M12 2 9.6 8.6 3 9l5.1 4.6L6.4 21 12 17.5 17.6 21l-1.7-7.4L21 9l-6.6-.4Z" />
             </svg>
           </div>
-          <div className="text-xs text-muted-foreground truncate">{handleFrom(t.name)} · {t.country}</div>
+          <div className="text-xs text-muted-foreground truncate">{handleFrom(t.name)}</div>
         </div>
         <div className="text-ember text-xs tracking-tight">★★★★★</div>
       </header>
