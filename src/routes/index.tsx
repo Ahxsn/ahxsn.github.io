@@ -11,16 +11,18 @@ import { ProjectShowcase } from "@/components/portfolio/ProjectShowcase";
 import { Testimonials } from "@/components/portfolio/Testimonials";
 import { Services } from "@/components/portfolio/Services";
 import { FAQ } from "@/components/portfolio/FAQ";
-import { STATS, REGIONS } from "@/components/portfolio/data";
+import { STATS } from "@/components/portfolio/data";
+import logoImg from "@/assets/logo.png";
+import profileImg from "@/assets/profile.webp";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Muhammad Ahsan — Expert WordPress Developer | Lahore, PK" },
-      { name: "description", content: "Muhammad Ahsan (M-Ahxsn) — WordPress, Elementor, WooCommerce and React specialist. Fast, SEO-optimized, beautifully animated websites for clients worldwide." },
-      { property: "og:title", content: "Muhammad Ahsan — Expert WordPress Developer" },
-      { property: "og:description", content: "Pixel-perfect WordPress, WooCommerce and React builds. Core Web Vitals in the green. Available worldwide." },
+      { title: "Muhammad Ahsan | Expert WordPress, Elementor & React Developer" },
+      { name: "description", content: "Hire Muhammad Ahsan (Ahxsn) for premium WordPress, Elementor, WooCommerce, custom themes, custom plugins and high-converting landing page development. Fast, SEO-optimized, beautifully animated websites." },
+      { property: "og:title", content: "Muhammad Ahsan | Expert WordPress, Elementor & React Developer" },
+      { property: "og:description", content: "Pixel-perfect WordPress, WooCommerce, custom themes and custom plugin development. Core Web Vitals in the green. Available for new projects." },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [{
@@ -29,14 +31,13 @@ export const Route = createFileRoute("/")({
         "@context": "https://schema.org",
         "@type": "Person",
         name: "Muhammad Ahsan",
-        alternateName: "M-Ahxsn",
+        alternateName: "Ahxsn",
         jobTitle: "Expert WordPress & Creative Frontend Developer",
         email: "m.ahxsn@gmail.com",
         telephone: "+92 303 9968120",
-        address: { "@type": "PostalAddress", addressLocality: "Lahore", addressRegion: "Punjab", addressCountry: "PK" },
         url: "/",
-        sameAs: ["https://linkedin.com/in/M-Ahxsn", "https://github.com/M-Ahxsn", "https://wa.me/923039968120"],
-        knowsAbout: ["WordPress", "Elementor", "WooCommerce", "React", "SEO", "UI/UX", "Tailwind CSS", "Figma to WordPress"],
+        sameAs: ["https://www.linkedin.com/in/m-ahxsn", "https://github.com/Ahxsn", "https://wa.me/923039968120"],
+        knowsAbout: ["WordPress", "Elementor", "WooCommerce", "Custom Themes", "Custom Plugins", "Landing Pages", "E-commerce", "React", "SEO"],
       }),
     }],
   }),
