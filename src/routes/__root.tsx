@@ -72,16 +72,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ahsan — Freelance WordPress & Creative Frontend Developer" },
-      { name: "description", content: "Premium WordPress, Elementor, React & UI/UX development. Building fast, beautiful, high-converting websites for clients worldwide." },
+      { title: "Muhammad Ahsan | Expert WordPress, Elementor & React Developer" },
+      { name: "description", content: "Premium WordPress, Elementor, custom themes, custom plugins, WooCommerce and React development. Fast, beautiful, high-converting websites for clients worldwide." },
       { name: "author", content: "Ahsan" },
-      { property: "og:title", content: "Ahsan — Freelance WordPress & Creative Frontend Developer" },
-      { property: "og:description", content: "Premium WordPress, Elementor, React & UI/UX development. Building fast, beautiful, high-converting websites for clients worldwide." },
+      { property: "og:title", content: "Muhammad Ahsan | Expert WordPress, Elementor & React Developer" },
+      { property: "og:description", content: "Premium WordPress, Elementor, custom themes, custom plugins, WooCommerce and React development. Fast, beautiful, high-converting websites." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Ahsan — Freelance WordPress & Creative Frontend Developer" },
-      { name: "twitter:description", content: "Premium WordPress, Elementor, React & UI/UX development. Building fast, beautiful, high-converting websites for clients worldwide." },
+      { name: "twitter:title", content: "Muhammad Ahsan | Expert WordPress, Elementor & React Developer" },
+      { name: "twitter:description", content: "Premium WordPress, Elementor, custom themes, custom plugins, WooCommerce and React development. Fast, beautiful, high-converting websites." },
     ],
     links: [
       {

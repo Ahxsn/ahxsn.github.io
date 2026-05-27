@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeProvider";
+import logoImg from "@/assets/logo.png";
 
 const LINKS = [
   { href: "#about", label: "About" },
@@ -38,11 +39,11 @@ export function Nav() {
           scrolled ? "glass ring-1 ring-foreground/10" : "bg-transparent"
         }`}>
           <a href="#top" className="flex items-center gap-2 font-semibold tracking-tight">
-            <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-xl bg-foreground text-background font-bold">
-              A
-              <span className="absolute -inset-0.5 -z-10 rounded-xl bg-gradient-to-br from-ember to-ember-glow opacity-70 blur" />
+            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-foreground p-1 ring-1 ring-foreground/20">
+              <img src={logoImg} alt="" aria-hidden="true" className="h-full w-full object-contain" />
+              <span className="absolute -inset-0.5 -z-10 rounded-xl bg-gradient-to-br from-ember to-ember-glow opacity-60 blur" />
             </span>
-            <span className="text-base">Ahsan<span className="text-ember">.</span></span>
+            <span className="text-base tracking-tight">Ahsan<span className="text-ember">.</span></span>
           </a>
           <nav className="hidden md:flex items-center gap-1">
             {LINKS.map((l) => (
