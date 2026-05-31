@@ -762,14 +762,35 @@ function Page() {
         >
           <ProjectShowcase />
         </Section>
-        <Section
-          id="testimonials"
-          eyebrow="Client love"
-          title={<>Trusted by <span className="text-gradient-ember">founders and studios.</span></>}
-          sub="Real reviews from clients across four continents. Hover the marquee to pause."
-        >
-          <Testimonials />
-        </Section>
+        <section id="testimonials" className="relative py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <div className="max-w-3xl mb-12 sm:mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2 rounded-full border border-foreground/15 px-3 py-1 text-xs uppercase tracking-[0.18em] text-muted-foreground mb-5"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-ember animate-[pulse-glow_2.4s_ease-in-out_infinite]" />
+                Client love
+              </motion.div>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-[1.05] tracking-tight"
+              >
+                Trusted by <span className="text-gradient-ember">founders and studios.</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
+                className="mt-5 text-lg text-muted-foreground max-w-2xl leading-relaxed"
+              >
+                Real reviews from clients across four continents. Hover the marquee to slow it down.
+              </motion.p>
+            </div>
+          </div>
+          {/* Edge-to-edge marquee — breaks out of the page container */}
+          <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <Testimonials />
+          </div>
+        </section>
         <WhyChoose />
         <Section
           id="faq"
