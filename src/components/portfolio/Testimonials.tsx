@@ -10,20 +10,20 @@ function handleFrom(name: string) {
 function Card({ t, accent }: { t: (typeof TESTIMONIALS)[number]; accent: string }) {
   const initials = t.name.split(" ").map((p) => p[0]).slice(0, 2).join("");
   return (
-    <figure className="w-[320px] sm:w-[360px] shrink-0 rounded-2xl border border-white/[0.06] bg-[#0d1424] p-6 transition-colors hover:border-white/[0.12]">
+    <figure className="w-[340px] sm:w-[380px] shrink-0 rounded-2xl border border-foreground/10 bg-card p-6 shadow-[0_1px_0_rgba(0,0,0,0.02),0_18px_40px_-24px_rgba(0,0,0,0.18)] transition-all hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-[0_1px_0_rgba(0,0,0,0.03),0_28px_60px_-28px_rgba(0,0,0,0.25)]">
       <header className="flex items-center gap-3">
         <div
-          className="h-10 w-10 shrink-0 rounded-full grid place-items-center text-[13px] font-semibold text-white"
-          style={{ background: `linear-gradient(135deg, ${accent}, #1f2937)` }}
+          className="h-10 w-10 shrink-0 rounded-full grid place-items-center text-[13px] font-semibold text-white ring-2 ring-background"
+          style={{ background: `linear-gradient(135deg, ${accent}, oklch(0.35 0.05 270))` }}
         >
           {initials}
         </div>
         <div className="min-w-0 flex-1 leading-tight">
-          <div className="font-semibold text-[15px] text-white truncate">{t.name}</div>
-          <div className="text-[13px] text-white/40 truncate">{handleFrom(t.name)}</div>
+          <div className="font-semibold text-[15px] text-foreground truncate">{t.name}</div>
+          <div className="text-[13px] text-muted-foreground truncate">{handleFrom(t.name)}</div>
         </div>
       </header>
-      <blockquote className="mt-4 text-[14.5px] leading-[1.65] text-white/75">
+      <blockquote className="mt-4 text-[14.5px] leading-[1.65] text-foreground/75">
         {t.text}
       </blockquote>
     </figure>
@@ -36,9 +36,10 @@ function Row({ items, direction, duration }: { items: (typeof TESTIMONIALS)[numb
   return (
     <div className="group relative overflow-hidden marquee-mask">
       <div
-        className="flex gap-5 w-max"
+        className="flex gap-5 w-max [animation-play-state:running] group-hover:[animation-duration:240s]"
         style={{
           animation: `${direction === "left" ? "marquee-left" : "marquee-right"} ${duration}s linear infinite`,
+          transition: "animation-duration 0.6s ease",
         }}
       >
         {doubled.map((t, i) => (
@@ -54,7 +55,7 @@ export function Testimonials() {
   const top = TESTIMONIALS.slice(0, half);
   const bottom = TESTIMONIALS.slice(half);
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 py-2">
       <Row items={top} direction="left" duration={80} />
       <Row items={bottom} direction="right" duration={90} />
     </div>
