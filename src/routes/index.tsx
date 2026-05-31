@@ -129,8 +129,8 @@ function Hero() {
       <div className="absolute -top-32 -right-32 h-[40rem] w-[40rem] rounded-full bg-ember/30 blur-3xl" />
       <div className="absolute -bottom-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-ember-glow/20 blur-3xl" />
 
-      <motion.div style={{ y, opacity }} className="relative mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-16 grid lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-7">
+      <motion.div style={{ y, opacity }} className="relative mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-16">
+        <div className="max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
             className="inline-flex items-center gap-2 rounded-full border border-foreground/15 glass px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground"
@@ -176,7 +176,7 @@ function Hero() {
 
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.8 }}
-            className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl"
+            className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl"
           >
             {STATS.map((s) => (
               <div key={s.label} className="glass rounded-xl px-4 py-3">
@@ -185,30 +185,6 @@ function Hero() {
               </div>
             ))}
           </motion.div>
-        </div>
-
-        <div className="lg:col-span-5 relative h-[420px] sm:h-[520px] lg:h-[620px]">
-          <ClientOnly>
-            <HeroScene />
-          </ClientOnly>
-          {/* floating skill chips around the orb */}
-          {SKILLS.slice(0, 6).map((s, i) => {
-            const angle = (i / 6) * Math.PI * 2;
-            const x = 50 + Math.cos(angle) * 42;
-            const y = 50 + Math.sin(angle) * 36;
-            return (
-              <motion.div
-                key={s.name}
-                className="absolute glass rounded-xl px-3 py-1.5 text-xs font-medium flex items-center gap-2"
-                style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 5 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24"><path d={s.path} fill={s.color} /></svg>
-                {s.name}
-              </motion.div>
-            );
-          })}
         </div>
       </motion.div>
 
