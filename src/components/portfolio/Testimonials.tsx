@@ -1,6 +1,6 @@
 import { TESTIMONIALS } from "./data";
 
-const ACCENTS = ["#ef4444", "#f43f5e", "#fb7185", "#dc2626", "#e11d48", "#f97316"];
+const ACCENTS = ["#ef4444", "#f43f5e", "#fb7185", "#dc2626", "#e11d48", "#f97316", "#a855f7", "#6366f1", "#06b6d4", "#10b981"];
 
 function handleFrom(name: string) {
   const parts = name.toLowerCase().split(" ");
@@ -10,27 +10,22 @@ function handleFrom(name: string) {
 function Card({ t, accent }: { t: (typeof TESTIMONIALS)[number]; accent: string }) {
   const initials = t.name.split(" ").map((p) => p[0]).slice(0, 2).join("");
   return (
-    <figure className="w-[360px] sm:w-[420px] shrink-0 rounded-2xl border border-foreground/10 bg-card p-5 hover:ring-ember-glow transition-shadow">
+    <figure className="w-[320px] sm:w-[360px] shrink-0 rounded-2xl border border-white/[0.06] bg-[#0d1424] p-6 transition-colors hover:border-white/[0.12]">
       <header className="flex items-center gap-3">
         <div
-          className="h-11 w-11 shrink-0 rounded-full grid place-items-center text-sm font-semibold text-white ring-2 ring-background"
-          style={{ background: `linear-gradient(135deg, ${accent}, var(--ember))` }}
+          className="h-10 w-10 shrink-0 rounded-full grid place-items-center text-[13px] font-semibold text-white"
+          style={{ background: `linear-gradient(135deg, ${accent}, #1f2937)` }}
         >
           {initials}
         </div>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
-            <span className="font-semibold text-sm truncate">{t.name}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" className="text-ember shrink-0">
-              <path fill="currentColor" d="M12 2 9.6 8.6 3 9l5.1 4.6L6.4 21 12 17.5 17.6 21l-1.7-7.4L21 9l-6.6-.4Z" />
-            </svg>
-          </div>
-          <div className="text-xs text-muted-foreground truncate">{handleFrom(t.name)}</div>
+        <div className="min-w-0 flex-1 leading-tight">
+          <div className="font-semibold text-[15px] text-white truncate">{t.name}</div>
+          <div className="text-[13px] text-white/40 truncate">{handleFrom(t.name)}</div>
         </div>
-        <div className="text-ember text-xs tracking-tight">★★★★★</div>
       </header>
-      <blockquote className="mt-4 text-sm leading-relaxed text-foreground/85 line-clamp-5">"{t.text}"</blockquote>
-      <div className="mt-3 text-[11px] text-muted-foreground/80">{t.role}</div>
+      <blockquote className="mt-4 text-[14.5px] leading-[1.65] text-white/75">
+        {t.text}
+      </blockquote>
     </figure>
   );
 }

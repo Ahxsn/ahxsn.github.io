@@ -1,133 +1,141 @@
-import { Suspense, useRef } from "react";
+import { Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, RoundedBox, Text } from "@react-three/drei";
-import type { Group } from "three";
+import { Float, Environment, RoundedBox, Text, MeshTransmissionMaterial } from "@react-three/drei";
+import type { Group, Mesh } from "three";
 
 /**
- * Stylized 3D developer workstation — laptop with live "code" lines,
- * a floating monitor with a browser window, and orbiting tech glyphs.
- * Designed to read instantly as: "This person builds websites."
+ * Hero 3D scene — a calm, modern depiction of the craft:
+ * a floating IDE window with animated code, a paired browser preview,
+ * a refractive glass orb for depth, and a drifting particle field.
+ * Tuned for clarity and prestige over spectacle.
  */
-function CodeLine({ y, w, color = "#ff5a5a" }: { y: number; w: number; color?: string }) {
+
+const ACCENT = "#ef4444";
+const ACCENT_SOFT = "#fb7185";
+
+function CodeRow({ y, w, color, x = 0 }: { y: number; w: number; color: string; x?: number }) {
+  const ref = useRef<Mesh>(null);
+  useFrame(({ clock }) => {
+    if (!ref.current) return;
+    const t = clock.getElapsedTime();
+    ref.current.scale.x = 1 + Math.sin(t * 0.6 + y * 4) * 0.015;
+  });
   return (
-    <RoundedBox args={[w, 0.05, 0.01]} radius={0.02} position={[-1.1 + w / 2, y, 0.02]}>
-      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.6} />
+    <RoundedBox
+      ref={ref as never}
+      args={[w, 0.055, 0.012]}
+      radius={0.025}
+      position={[-1.25 + w / 2 + x, y, 0.03]}
+    >
+      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} roughness={0.6} />
     </RoundedBox>
   );
 }
 
-function Laptop() {
+function Caret() {
+  const ref = useRef<Mesh>(null);
+  useFrame(({ clock }) => {
+    if (!ref.current) return;
+    ref.current.scale.x = Math.sin(clock.getElapsedTime() * 2.4) > 0 ? 1 : 0;
+  });
+  return (
+    <RoundedBox ref={ref as never} args={[0.035, 0.13, 0.014]} radius={0.005} position={[0.55, -0.66, 0.04]}>
+      <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.3} />
+    </RoundedBox>
+  );
+}
+
+function IDEWindow() {
   const group = useRef<Group>(null);
   useFrame(({ pointer, clock }) => {
     if (!group.current) return;
     const t = clock.getElapsedTime();
-    group.current.rotation.y = pointer.x * 0.25 + Math.sin(t * 0.25) * 0.08;
-    group.current.rotation.x = -0.08 + pointer.y * 0.08;
+    group.current.rotation.y = pointer.x * 0.12 + Math.sin(t * 0.35) * 0.04;
+    group.current.rotation.x = -pointer.y * 0.08 + Math.sin(t * 0.5) * 0.02;
+    group.current.position.y = Math.sin(t * 0.6) * 0.05;
   });
 
-  // Procedural code lines — gives a real "IDE" feel
-  const lines = [
-    { y: 0.85, w: 1.6, c: "#ff7a7a" },
-    { y: 0.7, w: 1.0, c: "#ffffff" },
-    { y: 0.55, w: 1.85, c: "#ffb199" },
-    { y: 0.4, w: 1.3, c: "#ffffff" },
-    { y: 0.25, w: 1.7, c: "#ff5a5a" },
-    { y: 0.1, w: 0.9, c: "#ffffff" },
-    { y: -0.05, w: 1.45, c: "#ffa07a" },
-    { y: -0.2, w: 1.1, c: "#ffffff" },
-    { y: -0.35, w: 1.8, c: "#ff5a5a" },
-    { y: -0.5, w: 0.7, c: "#ffffff" },
-    { y: -0.65, w: 1.55, c: "#ffb199" },
-  ];
+  const rows = useMemo(
+    () => [
+      { y: 0.78, w: 0.55, c: ACCENT_SOFT, x: 0 },
+      { y: 0.78, w: 0.85, c: "#94a3b8", x: 0.7 },
+      { y: 0.62, w: 1.25, c: "#cbd5e1", x: 0 },
+      { y: 0.46, w: 1.8, c: "#e2e8f0", x: 0 },
+      { y: 0.3, w: 1.05, c: ACCENT, x: 0 },
+      { y: 0.14, w: 1.55, c: "#cbd5e1", x: 0 },
+      { y: -0.02, w: 0.9, c: "#94a3b8", x: 0 },
+      { y: -0.18, w: 1.7, c: ACCENT_SOFT, x: 0 },
+      { y: -0.34, w: 1.3, c: "#cbd5e1", x: 0 },
+      { y: -0.5, w: 0.75, c: "#94a3b8", x: 0 },
+      { y: -0.66, w: 0.5, c: "#cbd5e1", x: 0 },
+    ],
+    [],
+  );
 
   return (
-    <group ref={group} position={[0, -0.4, 0]}>
-      {/* Base / keyboard */}
-      <RoundedBox args={[3.2, 0.12, 2.2]} radius={0.06} position={[0, -0.45, 0.3]}>
-        <meshStandardMaterial color="#1a1a1a" metalness={0.85} roughness={0.25} />
+    <group ref={group} position={[-0.4, 0.05, 0]} rotation={[0, 0.08, 0]}>
+      <RoundedBox args={[3.1, 2.2, 0.08]} radius={0.08}>
+        <meshStandardMaterial color="#0b1220" metalness={0.6} roughness={0.35} />
       </RoundedBox>
-      {/* Trackpad hint */}
-      <RoundedBox args={[1.1, 0.005, 0.7]} radius={0.02} position={[0, -0.38, 0.9]}>
-        <meshStandardMaterial color="#2a2a2a" metalness={0.5} roughness={0.4} />
+      <RoundedBox args={[2.95, 2.05, 0.02]} radius={0.06} position={[0, -0.02, 0.05]}>
+        <meshStandardMaterial color="#0f172a" emissive="#1e293b" emissiveIntensity={0.4} roughness={0.4} />
       </RoundedBox>
-
-      {/* Screen back */}
-      <group rotation={[-0.18, 0, 0]} position={[0, 0.45, -0.55]}>
-        <RoundedBox args={[3.2, 2, 0.08]} radius={0.06} position={[0, 0, 0]}>
-          <meshStandardMaterial color="#0e0e10" metalness={0.9} roughness={0.2} />
-        </RoundedBox>
-        {/* Screen face (glow) */}
-        <RoundedBox args={[3.05, 1.85, 0.02]} radius={0.04} position={[0, 0, 0.05]}>
+      <RoundedBox args={[2.95, 0.22, 0.005]} radius={0.04} position={[0, 0.94, 0.06]}>
+        <meshStandardMaterial color="#111827" />
+      </RoundedBox>
+      {[-1.32, -1.18, -1.04].map((x, i) => (
+        <mesh key={i} position={[x, 0.94, 0.07]}>
+          <circleGeometry args={[0.04, 24]} />
           <meshStandardMaterial
-            color="#120608"
-            emissive="#3a0a0a"
-            emissiveIntensity={0.9}
-            roughness={0.35}
+            color={["#ff5f57", "#febc2e", "#28c840"][i]}
+            emissive={["#ff5f57", "#febc2e", "#28c840"][i]}
+            emissiveIntensity={0.5}
           />
-        </RoundedBox>
-        {/* Window chrome dots */}
-        {[-1.4, -1.3, -1.2].map((x, i) => (
-          <mesh key={i} position={[x, 0.85, 0.07]}>
-            <circleGeometry args={[0.035, 16]} />
-            <meshBasicMaterial color={["#ff5f57", "#febc2e", "#28c840"][i]} />
-          </mesh>
-        ))}
-        {/* Code lines */}
-        <group position={[0, 0, 0.07]}>
-          {lines.map((l, i) => (
-            <CodeLine key={i} y={l.y} w={l.w} color={l.c} />
-          ))}
-        </group>
-        {/* Cursor blink */}
-        <BlinkingCursor />
-      </group>
-
-      {/* Floating side monitor with browser window */}
-      <FloatingMonitor />
-    </group>
-  );
-}
-
-function BlinkingCursor() {
-  const ref = useRef<Group>(null);
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    ref.current.scale.x = Math.sin(clock.getElapsedTime() * 3) > 0 ? 1 : 0;
-  });
-  return (
-    <group ref={ref} position={[0.45, -0.5, 0.08]}>
-      <RoundedBox args={[0.04, 0.12, 0.01]} radius={0.005}>
-        <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.2} />
+        </mesh>
+      ))}
+      <RoundedBox args={[0.95, 0.16, 0.005]} radius={0.03} position={[-0.55, 0.94, 0.065]}>
+        <meshStandardMaterial color="#1e293b" />
       </RoundedBox>
+      <Text position={[-0.55, 0.94, 0.072]} fontSize={0.085} color="#cbd5e1" anchorX="center" anchorY="middle">
+        index.tsx
+      </Text>
+      <group position={[0, -0.05, 0]}>
+        {rows.map((r, i) => (
+          <CodeRow key={i} y={r.y} w={r.w} color={r.c} x={r.x} />
+        ))}
+        <Caret />
+      </group>
     </group>
   );
 }
 
-function FloatingMonitor() {
+function BrowserPreview() {
   return (
-    <Float speed={1.4} rotationIntensity={0.25} floatIntensity={0.8}>
-      <group position={[2.4, 0.8, -0.3]} rotation={[0, -0.45, 0]}>
-        <RoundedBox args={[1.8, 1.25, 0.06]} radius={0.05}>
-          <meshStandardMaterial color="#0c0c0e" metalness={0.85} roughness={0.25} />
+    <Float speed={1.1} rotationIntensity={0.18} floatIntensity={0.5}>
+      <group position={[2.05, 0.35, -0.2]} rotation={[0, -0.32, 0]}>
+        <RoundedBox args={[1.85, 1.35, 0.07]} radius={0.07}>
+          <meshStandardMaterial color="#0b1220" metalness={0.5} roughness={0.3} />
         </RoundedBox>
-        <RoundedBox args={[1.7, 1.15, 0.02]} radius={0.03} position={[0, 0, 0.04]}>
-          <meshStandardMaterial color="#fafafa" emissive="#ffffff" emissiveIntensity={0.35} />
+        <RoundedBox args={[1.72, 1.22, 0.02]} radius={0.05} position={[0, -0.02, 0.045]}>
+          <meshStandardMaterial color="#f8fafc" />
         </RoundedBox>
-        {/* address bar */}
-        <RoundedBox args={[1.55, 0.08, 0.005]} radius={0.02} position={[0, 0.45, 0.06]}>
-          <meshStandardMaterial color="#ececec" />
+        <RoundedBox args={[1.55, 0.09, 0.005]} radius={0.025} position={[0, 0.5, 0.06]}>
+          <meshStandardMaterial color="#e2e8f0" />
         </RoundedBox>
-        {/* hero block */}
-        <RoundedBox args={[1.55, 0.42, 0.005]} radius={0.03} position={[0, 0.12, 0.06]}>
-          <meshStandardMaterial color="#111" />
+        <RoundedBox args={[1.55, 0.42, 0.005]} radius={0.04} position={[0, 0.18, 0.06]}>
+          <meshStandardMaterial color="#0f172a" />
         </RoundedBox>
-        <RoundedBox args={[0.45, 0.1, 0.005]} radius={0.02} position={[-0.5, 0.15, 0.07]}>
-          <meshStandardMaterial color="#ff5a5a" emissive="#ff5a5a" emissiveIntensity={0.7} />
+        <RoundedBox args={[0.42, 0.09, 0.005]} radius={0.02} position={[-0.52, 0.22, 0.07]}>
+          <meshStandardMaterial color={ACCENT} emissive={ACCENT} emissiveIntensity={0.6} />
         </RoundedBox>
-        {/* content rows */}
-        {[-0.18, -0.32, -0.46].map((y, i) => (
-          <RoundedBox key={i} args={[1.3 - i * 0.2, 0.05, 0.005]} radius={0.01} position={[-0.1, y, 0.06]}>
-            <meshStandardMaterial color="#d4d4d4" />
+        {[-0.14, -0.27, -0.4, -0.53].map((y, i) => (
+          <RoundedBox
+            key={i}
+            args={[1.45 - i * 0.18, 0.05, 0.005]}
+            radius={0.012}
+            position={[-0.05, y, 0.06]}
+          >
+            <meshStandardMaterial color={i === 0 ? "#475569" : "#cbd5e1"} />
           </RoundedBox>
         ))}
       </group>
@@ -135,26 +143,54 @@ function FloatingMonitor() {
   );
 }
 
-function OrbitingTag({ label, color, radius, speed, offset }: { label: string; color: string; radius: number; speed: number; offset: number }) {
-  const ref = useRef<Group>(null);
+function GlassOrb() {
+  return (
+    <Float speed={0.8} rotationIntensity={0.4} floatIntensity={0.6}>
+      <mesh position={[-2.4, 1.1, -1]}>
+        <sphereGeometry args={[0.45, 48, 48]} />
+        <MeshTransmissionMaterial
+          backside
+          thickness={0.6}
+          roughness={0.15}
+          ior={1.3}
+          chromaticAberration={0.05}
+          color="#ffffff"
+          transmission={1}
+        />
+      </mesh>
+    </Float>
+  );
+}
+
+function Particles({ count = 60 }: { count?: number }) {
+  const group = useRef<Group>(null);
+  const data = useMemo(
+    () =>
+      Array.from({ length: count }, () => ({
+        x: (Math.random() - 0.5) * 9,
+        y: (Math.random() - 0.5) * 5,
+        z: -1.5 - Math.random() * 2.5,
+        s: 0.012 + Math.random() * 0.022,
+        phase: Math.random() * Math.PI * 2,
+      })),
+    [count],
+  );
   useFrame(({ clock }) => {
-    if (!ref.current) return;
-    const t = clock.getElapsedTime() * speed + offset;
-    ref.current.position.x = Math.cos(t) * radius;
-    ref.current.position.z = Math.sin(t) * radius * 0.6;
-    ref.current.position.y = Math.sin(t * 1.3) * 0.3 + 0.3;
-    ref.current.rotation.y = -t;
+    if (!group.current) return;
+    const t = clock.getElapsedTime();
+    group.current.children.forEach((c, i) => {
+      const d = data[i];
+      c.position.y = d.y + Math.sin(t * 0.4 + d.phase) * 0.1;
+    });
   });
   return (
-    <group ref={ref}>
-      <Float speed={2} rotationIntensity={0.3} floatIntensity={0.4}>
-        <RoundedBox args={[label.length * 0.18 + 0.2, 0.32, 0.08]} radius={0.05}>
-          <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} metalness={0.4} roughness={0.3} />
-        </RoundedBox>
-        <Text position={[0, 0, 0.05]} fontSize={0.14} color="#fff" anchorX="center" anchorY="middle">
-          {label}
-        </Text>
-      </Float>
+    <group ref={group}>
+      {data.map((d, i) => (
+        <mesh key={i} position={[d.x, d.y, d.z]}>
+          <sphereGeometry args={[d.s, 8, 8]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.35} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -163,18 +199,18 @@ export function HeroScene() {
   return (
     <Canvas
       dpr={[1, 1.6]}
-      camera={{ position: [0.5, 1.1, 5.2], fov: 42 }}
+      camera={{ position: [0, 0.4, 5.2], fov: 40 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
-      <ambientLight intensity={0.45} />
-      <directionalLight position={[4, 6, 5]} intensity={1.3} color="#ffd6c8" />
-      <pointLight position={[-5, -2, -4]} intensity={1.2} color="#ff4a4a" />
-      <pointLight position={[3, 3, 2]} intensity={0.7} color="#ffffff" />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[4, 5, 4]} intensity={1.2} color="#ffffff" />
+      <pointLight position={[-4, -1, -2]} intensity={1.1} color={ACCENT} />
+      <pointLight position={[3, 3, 2]} intensity={0.5} color="#a5b4fc" />
       <Suspense fallback={null}>
-        <Laptop />
-        <OrbitingTag label="< / >" color="#ef4444" radius={3.2} speed={0.45} offset={0} />
-        <OrbitingTag label="WP" color="#1f1f1f" radius={3.4} speed={0.35} offset={2.1} />
-        <OrbitingTag label="JS" color="#f7df1e" radius={3.0} speed={0.5} offset={4.2} />
+        <Particles />
+        <GlassOrb />
+        <IDEWindow />
+        <BrowserPreview />
         <Environment preset="city" />
       </Suspense>
     </Canvas>
