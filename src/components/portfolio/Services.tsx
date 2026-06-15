@@ -71,7 +71,7 @@ export function Services() {
           key={s.title}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.7, delay: (i % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
           whileHover={{ y: -6 }}
           className="group relative overflow-hidden rounded-3xl border border-foreground/10 bg-card p-7"

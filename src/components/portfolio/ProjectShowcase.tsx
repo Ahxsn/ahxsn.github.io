@@ -6,7 +6,7 @@ function Card({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
     <motion.article
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2, amount: 0.15 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.8, delay: (i % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
       className="group relative rounded-3xl border border-foreground/10 bg-card overflow-hidden hover:ring-ember-glow transition-shadow"
     >
