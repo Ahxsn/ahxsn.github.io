@@ -157,7 +157,7 @@ function Hero() {
             className="mt-7 max-w-xl text-lg text-muted-foreground leading-relaxed"
           >
             Hi, I'm <span className="text-foreground font-medium">Muhammad Ahsan</span>, a WordPress,
-            Elementor and custom plugin specialist engineering high-converting, lightning-fast and SEO-optimized
+            Elementor, Bricks Builder and custom plugin specialist engineering high-converting, lightning-fast and SEO-optimized
             digital experiences. Sites that <span className="text-foreground">actually convert.</span>
           </motion.p>
           <motion.div
@@ -244,6 +244,12 @@ function Marquee() {
         <svg viewBox="0 0 24 24" className="h-7 w-7"><path fill="currentColor" d="M14 2a2 2 0 0 0-2 2v2H8a2 2 0 0 0-2 2v4H4a2 2 0 1 0 0 4h2v4a2 2 0 0 0 2 2h4v-2a2 2 0 1 1 4 0v2h4a2 2 0 0 0 2-2v-4h-2a2 2 0 1 1 0-4h2V8a2 2 0 0 0-2-2h-4V4a2 2 0 0 0-2-2Z" /></svg>
       ),
     },
+    {
+      name: "Bricks Builder", color: "#0D9488",
+      icon: (
+        <svg viewBox="0 0 24 24" className="h-7 w-7"><path fill="currentColor" d="M3 5h8v4H3V5Zm10 0h8v4h-8V5ZM3 13h8v4H3v-4Zm10 0h8v4h-8v-4Z" /></svg>
+      ),
+    },
   ];
   const doubled = [...items, ...items];
   return (
@@ -275,7 +281,7 @@ function About() {
         <div className="lg:col-span-7 order-1 space-y-5 text-lg text-foreground/85 leading-relaxed">
           <motion.p initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.2 }} transition={{ duration: 0.7 }}>
             I am a senior WordPress and frontend engineer specialising in the end-to-end delivery of premium
-            digital platforms. My practice spans custom theme architecture, advanced Elementor systems, bespoke
+            digital platforms. My practice spans custom theme architecture, advanced Elementor and Bricks systems, bespoke
             plugin engineering, WooCommerce commerce builds and high-performance React experiences.
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.2 }} transition={{ duration: 0.7, delay: 0.1 }}>
@@ -294,7 +300,7 @@ function About() {
             <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground mb-4">Core competencies</div>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { t: "WordPress & Elementor", d: "Custom themes, block patterns and locked-down editor experiences." },
+                { t: "WordPress, Elementor & Bricks", d: "Custom themes, block patterns and locked-down editor experiences across both builders." },
                 { t: "Custom Plugins", d: "Purpose-built functionality engineered for security and scale." },
                 { t: "WooCommerce", d: "Storefronts that load fast and check out faster." },
                 { t: "Landing Pages", d: "High-conversion, CRO-optimised pages built for paid traffic." },
@@ -344,6 +350,7 @@ function About() {
 const SKILL_GROUPS = [
   { name: "WordPress", desc: "Custom themes, blocks, ACF, multilingual, headless setups." },
   { name: "Elementor Pro", desc: "Custom widgets, theme builder, locked-down editor experiences." },
+  { name: "Bricks Builder", desc: "High-performance visual builds with clean markup, dynamic data and total design freedom." },
   { name: "WooCommerce", desc: "Stores, subscriptions, multi-currency, checkout optimisation." },
   { name: "React", desc: "Component libraries, design systems, animated SPAs and SSR." },
   { name: "Tailwind CSS", desc: "Design tokens, theming, accessible utility-driven UI." },
