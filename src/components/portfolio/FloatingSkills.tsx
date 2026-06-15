@@ -31,7 +31,7 @@ function SkillBadge({ name, color, path, i }: (typeof SKILLS)[number] & { i: num
       style={{ left: `${x}%`, top: `${y}%`, transform: "translate(-50%,-50%)" }}
       initial={{ opacity: 0, scale: 0.6 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.7, delay: delay * 0.15, ease: [0.16, 1, 0.3, 1] }}
     >
       <motion.div
