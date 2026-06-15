@@ -16,6 +16,7 @@ const SKILLS = [
   { name: "UI/UX", color: "#a78bfa", path: "M4 5h16v10H4V5Zm-2 12h20v2H2v-2Zm5-7h2v4H7v-4Zm4-2h2v6h-2V8Zm4 3h2v3h-2v-3Z" },
   { name: "API", color: "#06b6d4", path: "M4 6h16v4H4V6Zm0 8h16v4H4v-4Zm2-6h2v2H6V8Zm0 8h2v2H6v-2Z" },
   { name: "Hosting", color: "#10b981", path: "M5 4h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 9h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2Zm2-7v1h1V6H7Zm0 9v1h1v-1H7Z" },
+  { name: "Bricks", color: "#0D9488", path: "M3 5h8v4H3V5Zm10 0h8v4h-8V5ZM3 13h8v4H3v-4Zm10 0h8v4h-8v-4Z" },
 ];
 
 function SkillBadge({ name, color, path, i }: (typeof SKILLS)[number] & { i: number }) {
