@@ -103,6 +103,18 @@ export const SERVICES = [
     desc: "High-performance Bricks Builder sites with dynamic data, custom elements and blazing fast render times.",
     icon: "blocks",
   },
+  {
+    n: "08",
+    title: "Custom Theme Development",
+    desc: "Hand-coded PHP WordPress themes built from scratch — clean markup, custom blocks, ACF and full editor control for your team.",
+    icon: "layers",
+  },
+  {
+    n: "09",
+    title: "Custom Plugin Development",
+    desc: "Bespoke WordPress plugins in PHP and JavaScript: admin panels, REST endpoints, integrations, and reusable functionality engineered for security and scale.",
+    icon: "shield",
+  },
 ];
 
 export const TESTIMONIALS = [

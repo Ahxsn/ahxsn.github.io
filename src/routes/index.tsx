@@ -682,7 +682,7 @@ function Footer() {
           {/* Sitemap */}
           <div className="lg:col-span-3 grid grid-cols-2 gap-8">
             <FooterCol title="Site" links={[["About", "#about"], ["Services", "#services"], ["Work", "#work"], ["FAQ", "#faq"]]} />
-            <FooterCol title="Skills" links={[["WordPress", "#skills"], ["Elementor", "#skills"], ["Bricks Builder", "#skills"], ["WooCommerce", "#skills"], ["React", "#skills"]]} />
+            <FooterCol title="Skills" links={[["WordPress", "#skills"], ["PHP & Custom Themes", "#skills"], ["JavaScript & Plugins", "#skills"], ["Elementor", "#skills"], ["Bricks Builder", "#skills"], ["WooCommerce", "#skills"], ["React", "#skills"]]} />
           </div>
 
           {/* Contact card */}
@@ -773,8 +773,9 @@ function Page() {
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-clip">
       <Cursor />
+      <FloatingElements />
       <Nav />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Marquee />
         <About />
