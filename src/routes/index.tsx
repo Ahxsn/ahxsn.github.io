@@ -10,8 +10,6 @@ import { ProjectShowcase } from "@/components/portfolio/ProjectShowcase";
 import { Testimonials } from "@/components/portfolio/Testimonials";
 import { Services } from "@/components/portfolio/Services";
 import { FAQ } from "@/components/portfolio/FAQ";
-import { FloatingElements } from "@/components/portfolio/FloatingElements";
-import { TextReveal } from "@/components/portfolio/TextReveal";
 import { STATS } from "@/components/portfolio/data";
 import logoImg from "@/assets/logo.png";
 import profileImg from "@/assets/profile.webp";
@@ -304,9 +302,9 @@ function About() {
     >
       <div className="grid lg:grid-cols-12 gap-10 items-start">
         <div className="lg:col-span-7 order-1 space-y-5 text-lg text-foreground/85 leading-relaxed">
-          <TextReveal className="text-lg sm:text-xl leading-relaxed">
+          <p className="text-lg sm:text-xl leading-relaxed text-foreground/85">
             I am a senior WordPress, PHP and JavaScript engineer from Pakistan specialising in custom theme architecture, bespoke plugin development, advanced Elementor and Bricks systems, WooCommerce builds and high-performance React experiences.
-          </TextReveal>
+          </p>
           <motion.p initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.2 }} transition={{ duration: 0.7, delay: 0.1 }}>
             Every engagement is approached with a measurable mandate: maximise conversion, reduce technical
             debt, and ship sites that meet enterprise standards for speed, security, accessibility and search
@@ -774,7 +772,7 @@ function Page() {
   return (
     <div className="relative min-h-screen bg-background text-foreground overflow-x-clip">
       <Cursor />
-      <FloatingElements />
+      
       <Nav />
       <main className="relative z-10">
         <Hero />

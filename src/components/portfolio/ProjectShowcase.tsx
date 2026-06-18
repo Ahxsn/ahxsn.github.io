@@ -17,19 +17,19 @@ function Card({ p, i }: { p: (typeof PROJECTS)[number]; i: number }) {
           <div
             className="will-change-transform"
             style={{
-              transition: "transform 6s cubic-bezier(0.22, 1, 0.36, 1)",
+              transition: "transform 12s cubic-bezier(0.22, 1, 0.36, 1)",
               transform: "translateY(0%)",
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLDivElement;
               const parent = el.parentElement!;
               const distance = el.scrollHeight - parent.clientHeight;
-              el.style.transition = "transform 6s cubic-bezier(0.22, 1, 0.36, 1)";
+              el.style.transition = "transform 12s cubic-bezier(0.22, 1, 0.36, 1)";
               el.style.transform = `translateY(-${distance}px)`;
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLDivElement;
-              el.style.transition = "transform 1.2s cubic-bezier(0.22, 1, 0.36, 1)";
+              el.style.transition = "transform 2.4s cubic-bezier(0.22, 1, 0.36, 1)";
               el.style.transform = "translateY(0px)";
             }}
           >
